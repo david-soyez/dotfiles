@@ -1,0 +1,8 @@
+*.swp
+*.swo
+.netrwhist
+bundle/*
+!bundle/Vundle.vim
+!bundle/Vundle.vim/*
+colors/*
+sessions/*

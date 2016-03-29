@@ -136,8 +136,8 @@ noremap <Leader>n :NERDTreeToggle<CR>
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-"opens geolid tags database
-set tags=/home/david/Documents/Projets/Geolid/tags
+"opens tags in .git directory, looking for it parent to parent 
+set tags=./.git/tags;
 
 "let g:session_default_name = 'geolid'
 let g:session_directory = '~/.vim/sessions'
