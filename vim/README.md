@@ -3,10 +3,7 @@
 ### Installation
 
 ```Bash
-$ cd ~
-$ git clone git@github.com:david-soyez/vim.git
-$ mv vim .vim
-$ cd .vim
+$ cd ~/.vim
 $ git submodule init
 start vim and type :PluginInstall
 exit vim
