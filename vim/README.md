@@ -15,4 +15,8 @@ $ sudo apt-get install exuberant-ctags
 
 cd your project and run:
 ctags -R --exclude='.git' -f ./.git/tags .
+
+cd ~/.vim/bundle/command-t/ruby/command-t
+ruby extconf.rb
+make
 ```
