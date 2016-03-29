@@ -1,0 +1,5 @@
+[user]
+	name = David Soyez
+	email = david@dexnode.com
+[core]
+	excludesfile = ~/.gitignore
