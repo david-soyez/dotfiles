@@ -60,9 +60,9 @@ set statusline+=%y			" file type
 set statusline+=%=			" separator from left to right justified
 
 nmap <F8> :TagbarToggle<CR>
-GitGutterEnable
-GitGutterSignsEnable
-GitGutterLineHighlightsDisable
+autocmd vimenter * GitGutterEnable
+autocmd vimenter * GitGutterSignsEnable
+autocmd vimenter * GitGutterLineHighlightsDisable
 let g:gitgutter_override_sign_column_highlight = 1
 highlight SignColumn ctermbg=black    " terminal Vim
 highlight SignColumn guibg=black      " gVim/MacVim
@@ -181,3 +181,8 @@ noremap <A-s> :SaveSession<CR>
 
 "shortcut for C-X C-P
 inoremap <C-Space> <C-x><C-p>
+
+" indent guide
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_guide_size = 1
+autocmd vimenter * IndentGuidesEnable
