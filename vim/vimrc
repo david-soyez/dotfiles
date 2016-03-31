@@ -182,8 +182,13 @@ autocmd vimenter * IndentGuidesEnable
 " red cursor
 highlight cursor guifg=white guibg=red
 
-" Disable all blinking:
+" disable cursor blinking:
 set guicursor+=a:blinkon0
 
 " cursor color
 highlight Cursor guifg=red guibg=yellow
+
+" color the currenet line
+set cursorline
+highlights CursorLine guifg=NONE guibg=#333333
+
