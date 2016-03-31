@@ -23,6 +23,7 @@ $ cd your project and run:
 $ ctags -R --exclude='.git' -f ./.git/tags .
 
 echo Installation of command-t vim plugin
+$ sudo apt-get install ruby-dev
 $ cd ~/.vim/bundle/command-t/ruby/command-t
 $ ruby extconf.rb
 $ make
