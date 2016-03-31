@@ -40,6 +40,20 @@ filetype plugin indent on    " required
 
 " non-Plugin stuff after this line
 
+set shortmess+=I " No intro when starting Vim
+set history=100 " keep 100 undo
+set wildmenu " Better command-line completion
+set backspace=indent,eol,start " The normal behaviour of backspace
+
+" search
+set ignorecase " Search insensitive
+set smartcase " Search always insensitive but sensitive when there is a uppercase
+set incsearch " move the cursor to the matched string while typing
+"built-in: Press * to search forwards for selected text, or # to search backwards
+
+let &showbreak="\u21aa " " Show a left arrow when wrapping text
+
+" statusbar
 set laststatus=2
 set statusline=%1*			" Switch to User1 color highlight
 set statusline+=%<%F			" file name, cut if needed at start
@@ -75,7 +89,7 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-"jk to exit insert mjjode
+"jk to exit insert mode
 inoremap jk <esc>
 inoremap <esc> <nop>
 noremap <Up> <NOP>
@@ -190,5 +204,7 @@ highlight Cursor guifg=red guibg=yellow
 
 " color the currenet line
 set cursorline
-highlights CursorLine guifg=NONE guibg=#333333
+highlight CursorLine guifg=NONE guibg=#333333
 
+" map find /
+nmap <Leader>f /
