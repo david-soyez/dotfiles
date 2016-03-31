@@ -5,7 +5,7 @@
 ```Bash
 echo checkout vundle vim plugin
 $ cd ~/.vim
-$ git submodule init
+$ git submodule update --init 
 
 echo Download and install all vim plugins
 start vim and type :PluginInstall
