@@ -10,34 +10,33 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-Plugin 'StanAngeloff/php.vim'
-Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'tpope/vim-fugitive'
-"Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'majutsushi/tagbar'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'L9'
-Plugin 'FuzzyFinder'
-Plugin 'bling/vim-airline'
-"Plugin 'kien/ctrlp.vim'
-Plugin 'taglist.vim'
-Plugin 'wincent/command-t'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'scrooloose/nerdtree'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
-"Plugin 'xolox/vim-easytags'
-"Plugin 'Shougo/neocomplete'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'Valloric/YouCompleteMe'
+" Plugins declaration starts here
 
-" All of your Plugins must be added before the following line
+Plugin 'StanAngeloff/php.vim' " Up-to-date PHP syntax file
+Plugin 'shawncplus/phpcomplete.vim' " Improved PHP omnicompletion
+Plugin 'nathanaelkane/vim-indent-guides' " displays indent levels in code
+Plugin 'flazz/vim-colorschemes' " one colorscheme pack to rule them all
+Plugin 'tpope/vim-fugitive' "  a Git wrapper
+Plugin 'majutsushi/tagbar' " displays tags in a window F8
+Plugin 'airblade/vim-gitgutter' " shows a git diff in the gutte
+Plugin 'L9' " vim-scripts Library
+Plugin 'FuzzyFinder' " vim-scripts Quickly reach the buffer/file/command/bookmark/tag
+Plugin 'bling/vim-airline' " Lean and mean status bar
+Plugin 'taglist.vim' " vim-scripts Tag List
+Plugin 'wincent/command-t' " Fast file navigation
+Plugin 'terryma/vim-multiple-cursors' " True Sublime Text style multiple selections for Vim
+Plugin 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red and provides :FixWhitespace to fix it
+Plugin 'scrooloose/nerdtree' " A tree explorer plugin for vim
+Plugin 'xolox/vim-misc' " xolox dependency
+Plugin 'xolox/vim-session' " Extended session management for Vim
+"Plugin 'xolox/vim-easytags' " Automated tag file generation and syntax highlighting of tags in Vim
+"Plugin 'Shougo/neocomplete' " Next generation completion 
+Plugin 'Shougo/neosnippet' "  adds snippet support to Vim
+Plugin 'Shougo/neosnippet-snippets' " snippets repository
+Plugin 'Valloric/YouCompleteMe' " A code-completion engine 
+
+" Plugins declaration ends here
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
