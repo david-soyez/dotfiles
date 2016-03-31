@@ -11,7 +11,7 @@ echo Download and install all vim plugins
 start vim and type :PluginInstall
 exit vim
 
-echo Insttallation of YouCompleteMe vim plugin
+echo Installation of YouCompleteMe vim plugin
 $ cd ~/.vim/bundle/YouCompleteMe/
 $ sudo apt-get install build-essential cmake
 $ sudo apt-get install python-dev python3-dev
