@@ -156,7 +156,7 @@ exec_always --no-startup-id /home/david/Enpass/runenpass.sh
 
 bindcode Control+Shift+86 exec "amixer -D pulse sset Master 5%+"
 bindcode Control+Shift+82 exec "amixer -D pulse sset Master 5%-"
-exec_always --no-startup-id "setxkbmp en"
+exec_always --no-startup-id "setxkbmap us"
 #exec_always --no-startup-id "screen -d -m rescuetime"
 
 #new_window normal 0 px

@@ -27,11 +27,9 @@ Plugin 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red
 Plugin 'scrooloose/nerdtree' " A tree explorer plugin for vim
 Plugin 'xolox/vim-misc' " xolox dependency
 Plugin 'xolox/vim-session' " Extended session management for Vim
-"Plugin 'xolox/vim-easytags' " Automated tag file generation and syntax highlighting of tags in Vim
-"Plugin 'Shougo/neocomplete' " Next generation completion 
-Plugin 'Shougo/neosnippet' "  adds snippet support to Vim
-Plugin 'Shougo/neosnippet-snippets' " snippets repository
-Plugin 'Valloric/YouCompleteMe' " A code-completion engine 
+Plugin 'Valloric/YouCompleteMe' " A code-completion engine
+Plugin 'SirVer/ultisnips' " The ultimate snippet solution for Vim
+Plugin 'honza/vim-snippets' " supports all snippets with YouCompleteMe
 
 " Plugins declaration ends here
 
@@ -75,7 +73,7 @@ set t_Co=256
 let g:rehash256 = 1
 let g:molokai_original = 1
 colorscheme molokai 
-set guifont=Monospace\ 13
+set guifont=Monospace\ 12
 
 " speed up scrolling in terminal
 set lazyredraw
@@ -191,6 +189,7 @@ inoremap <C-Space> <C-x><C-p>
 " indent guide
 let g:indent_guides_auto_colors = 1
 let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
 autocmd vimenter * IndentGuidesEnable
 
 " red cursor
@@ -208,3 +207,11 @@ highlight CursorLine guifg=NONE guibg=#333333
 
 " map find /
 nmap <Leader>f /
+
+" for watch mode or live refresh
+set backupcopy=yes
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<C-b>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
