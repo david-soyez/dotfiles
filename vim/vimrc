@@ -204,6 +204,7 @@ highlight Cursor guifg=red guibg=yellow
 " color the currenet line
 set cursorline
 highlight CursorLine guifg=NONE guibg=#333333
+highlight Visual guibg=pink guifg=#000000 gui=none
 
 " map find /
 nmap <Leader>f /
