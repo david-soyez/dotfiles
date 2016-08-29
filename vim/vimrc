@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+syntax on
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -13,14 +14,15 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'StanAngeloff/php.vim' " Up-to-date PHP syntax file
 Plugin 'shawncplus/phpcomplete.vim' " Improved PHP omnicompletion
 Plugin 'nathanaelkane/vim-indent-guides' " displays indent levels in code
-Plugin 'flazz/vim-colorschemes' " one colorscheme pack to rule them all
+"Plugin 'flazz/vim-colorschemes' " one colorscheme pack to rule them all
 Plugin 'tpope/vim-fugitive' "  a Git wrapper
 Plugin 'majutsushi/tagbar' " displays tags in a window F8
 Plugin 'airblade/vim-gitgutter' " shows a git diff in the gutte
 Plugin 'L9' " vim-scripts Library
 Plugin 'FuzzyFinder' " vim-scripts Quickly reach the buffer/file/command/bookmark/tag
 Plugin 'bling/vim-airline' " Lean and mean status bar
-Plugin 'taglist.vim' " vim-scripts Tag List
+Plugin 'vim-airline/vim-airline-themes' " vim airline themes
+"Plugin 'taglist.vim' " vim-scripts Tag List
 Plugin 'wincent/command-t' " Fast file navigation
 Plugin 'terryma/vim-multiple-cursors' " True Sublime Text style multiple selections for Vim
 Plugin 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red and provides :FixWhitespace to fix it
@@ -28,8 +30,15 @@ Plugin 'scrooloose/nerdtree' " A tree explorer plugin for vim
 Plugin 'xolox/vim-misc' " xolox dependency
 Plugin 'xolox/vim-session' " Extended session management for Vim
 Plugin 'Valloric/YouCompleteMe' " A code-completion engine
-Plugin 'SirVer/ultisnips' " The ultimate snippet solution for Vim
-Plugin 'honza/vim-snippets' " supports all snippets with YouCompleteMe
+"Plugin 'SirVer/ultisnips' " The ultimate snippet solution for Vim
+"Plugin 'honza/vim-snippets' " supports all snippets with YouCompleteMe
+Plugin 'spolu/dwm.vim' " Tiled window management
+Plugin 'easymotion/vim-easymotion'
+Plugin 'haya14busa/incsearch.vim'
+Plugin 'haya14busa/incsearch-easymotion.vim'
+"Plugin 'noah/vim256-color'
+Plugin 'pangloss/vim-javascript'
+Plugin 'morhetz/gruvbox'
 
 " Plugins declaration ends here
 
@@ -59,7 +68,7 @@ set statusline+=%M			" modified flag
 set statusline+=%y			" file type
 set statusline+=%=			" separator from left to right justified
 
-nmap <F8> :TagbarToggle<CR>
+"nmap <F8> :TagbarToggle<CR>
 autocmd vimenter * GitGutterEnable
 autocmd vimenter * GitGutterSignsEnable
 autocmd vimenter * GitGutterLineHighlightsDisable
@@ -68,12 +77,20 @@ highlight SignColumn ctermbg=black    " terminal Vim
 highlight SignColumn guibg=black      " gVim/MacVim
 
 "theme and fonts
+set term=screen-256color
 set background=dark
 set t_Co=256
 let g:rehash256 = 1
 let g:molokai_original = 1
-colorscheme molokai 
-set guifont=Monospace\ 12
+"colorscheme molokai
+let g:gruvbox_contrast_dark = "hard"
+colorscheme gruvbox
+let g:airline_theme='gruvbox'
+"colorscheme cobalt2
+"set guifont=Monospace\ 14
+set guifont=Menlo\ Regular:h13
+
+
 
 " speed up scrolling in terminal
 set lazyredraw
@@ -101,7 +118,16 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 nnoremap <silent> <F8> :TlistToggle<CR>
 let Tlist_Auto_Open = 1
 let Tlist_Use_Right_Window = 1
-nmap <C-Tab> :tabn <CR>
+
+" dwm Default master width
+let g:dwm_master_pane_width = 110
+" Tab navigation like Firefox.
+nnoremap <C-S-tab> :tabprevious<CR>
+nnoremap <C-tab>   :tabnext<CR>
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-S-tab> <Esc>:tabprevious<CR>i
+inoremap <C-tab>   <Esc>:tabnext<CR>i
+inoremap <C-t>     <Esc>:tabnew<CR>
 
 let mapleader = "\<Space>"
 
@@ -124,11 +150,11 @@ vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <C-O>:update<CR>
 
 " Indentation
-set expandtab
-set shiftwidth=4
-set softtabstop=4
-set autoindent
-set smartindent
+set expandtab " insert space characters whenever the tab key is pressed
+set shiftwidth=4 "control how many columns text is indented with the reindent operations (<< and >>)
+set softtabstop=4 "control how many columns vim uses when you hit Tab in insert mode
+set autoindent " copy the indentation from the previous line
+set smartindent "automatically inserts one extra level of indentation in some cases
 
 "set hlsearch
 "hi Search guibg=yellow
@@ -167,7 +193,7 @@ function! Tab_Or_Complete()
 endfunction
 inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
-let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#enable_at_startup = 1
 
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -180,8 +206,8 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 "endif
 
 "Shortcuts for opening and saving sessions
-noremap <A-o> :OpenSession<CR> 
-noremap <A-s> :SaveSession<CR> 
+noremap ø :OpenSession<CR> 
+noremap ß :SaveSession<CR> 
 
 "shortcut for C-X C-P
 inoremap <C-Space> <C-x><C-p>
@@ -216,3 +242,50 @@ set backupcopy=yes
 let g:UltiSnipsExpandTrigger="<C-b>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" mouse
+set mouse=a
+set ttymouse=xterm2
+
+" You can use other keymappings like <C-l> instead of <CR> if you want to
+" use these mappings as default search and somtimes want to move cursor
+" with  EasyMotion.
+function! s:incsearch_config(...) abort
+return incsearch#util#deepextend(deepcopy({
+\   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+\   'keymap': {
+\     "\<CR>": '<Over>(easymotion)'
+\   },
+\   'is_expr': 0
+\ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command':'?'}))
+noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay':1}))
+
+" vim airline
+let g:airline#extensions#tabline#enabled = 1 " Automatically displays all buffers when there's only one tab open
+
+" Javascript plugin
+let g:javascript_plugin_jsdoc = 1
+
+" php.vim
+function! PhpSyntaxOverride()
+    hi! def link phpDocTags  phpDefine
+    hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+    autocmd!
+    autocmd FileType php call PhpSyntaxOverride()
+augroup END
+
+" key sequence timeout
+set timeoutlen=1000 ttimeoutlen=0
+
+" youcompleteme
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_add_preview_to_completeopt = 0
+set completeopt-=preview
