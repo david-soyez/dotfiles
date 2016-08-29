@@ -31,6 +31,6 @@ make
 
 cd your project and run:
 ```Bash
-ctags -R --exclude='.git' -f ./.git/tags .
+ctags -R --exclude=.git --exclude=node_modules --exclude=bower_components --tag-relative=yes -f ./.git/tags .
 ```
 
