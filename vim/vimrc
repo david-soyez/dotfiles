@@ -14,13 +14,14 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'StanAngeloff/php.vim' " Up-to-date PHP syntax file
 Plugin 'shawncplus/phpcomplete.vim' " Improved PHP omnicompletion
 Plugin 'nathanaelkane/vim-indent-guides' " displays indent levels in code
-"Plugin 'flazz/vim-colorschemes' " one colorscheme pack to rule them all
+Plugin 'flazz/vim-colorschemes' " one colorscheme pack to rule them all
 Plugin 'tpope/vim-fugitive' "  a Git wrapper
 Plugin 'majutsushi/tagbar' " displays tags in a window F8
 Plugin 'airblade/vim-gitgutter' " shows a git diff in the gutte
 Plugin 'L9' " vim-scripts Library
 Plugin 'FuzzyFinder' " vim-scripts Quickly reach the buffer/file/command/bookmark/tag
-Plugin 'bling/vim-airline' " Lean and mean status bar
+"Plugin 'bling/vim-airline' " Lean and mean status bar
+Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes' " vim airline themes
 "Plugin 'taglist.vim' " vim-scripts Tag List
 Plugin 'wincent/command-t' " Fast file navigation
@@ -33,12 +34,14 @@ Plugin 'Valloric/YouCompleteMe' " A code-completion engine
 "Plugin 'SirVer/ultisnips' " The ultimate snippet solution for Vim
 "Plugin 'honza/vim-snippets' " supports all snippets with YouCompleteMe
 Plugin 'spolu/dwm.vim' " Tiled window management
-Plugin 'easymotion/vim-easymotion'
+"Plugin 'easymotion/vim-easymotion'
 Plugin 'haya14busa/incsearch.vim'
-Plugin 'haya14busa/incsearch-easymotion.vim'
+"Plugin 'haya14busa/incsearch-easymotion.vim'
 "Plugin 'noah/vim256-color'
 Plugin 'pangloss/vim-javascript'
 Plugin 'morhetz/gruvbox'
+Plugin 'tomasr/molokai'
+Plugin 'ap/vim-css-color'
 
 " Plugins declaration ends here
 
@@ -80,17 +83,36 @@ highlight SignColumn guibg=black      " gVim/MacVim
 set term=screen-256color
 set background=dark
 set t_Co=256
-let g:rehash256 = 1
-let g:molokai_original = 1
-"colorscheme molokai
+"colorscheme 256-jungle
+"let g:rehash256 = 1
+"let g:molokai_original = 1
+"colorscheme molokai_dark
+"let g:airline_theme='molokai'
+
+" gruvbox
 let g:gruvbox_contrast_dark = "hard"
 colorscheme gruvbox
 let g:airline_theme='gruvbox'
+
+" papercolor
+"colorscheme papercolor
+"set background=dark
+
+"let g:PaperColor_Light_Override = { 'background' : '#abcdef', 'cursorline' : '#dfdfff', 'matchparen' : '#d6d6d6' , 'comment' : '#8e908c' }
+"let g:PaperColor_Dark_Override = { 'background' : '#1c1c1c', 'cursorline' : '#abcdef', 'matchparen' : '#3a3a3a', 'comment' : '#5f875f' }
+"let g:airline_theme='papercolor'
+
+"hi Normal guibg=NONE ctermbg=NONE
+"hi CursorLine cterm=NONE ctermbg=21
+
+"colorscheme jellybeans
+"let g:airline_theme='jellybeans'
+"let g:airline_theme='molokai'
 "colorscheme cobalt2
 "set guifont=Monospace\ 14
-set guifont=Menlo\ Regular:h13
+set guifont=Menlo\ Regular:h12
 
-
+"let g:jellybeans_use_lowcolor_black = 0
 
 " speed up scrolling in terminal
 set lazyredraw
@@ -120,7 +142,7 @@ let Tlist_Auto_Open = 1
 let Tlist_Use_Right_Window = 1
 
 " dwm Default master width
-let g:dwm_master_pane_width = 110
+let g:dwm_master_pane_width = 170
 " Tab navigation like Firefox.
 nnoremap <C-S-tab> :tabprevious<CR>
 nnoremap <C-tab>   :tabnext<CR>
@@ -250,19 +272,23 @@ set ttymouse=xterm2
 " You can use other keymappings like <C-l> instead of <CR> if you want to
 " use these mappings as default search and somtimes want to move cursor
 " with  EasyMotion.
-function! s:incsearch_config(...) abort
-return incsearch#util#deepextend(deepcopy({
-\   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-\   'keymap': {
-\     "\<CR>": '<Over>(easymotion)'
-\   },
-\   'is_expr': 0
-\ }), get(a:, 1, {}))
-endfunction
+"function! s:incsearch_config(...) abort
+"return incsearch#util#deepextend(deepcopy({
+"\   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+"\   'keymap': {
+"\     "\<CR>": '<Over>(easymotion)'
+"\   },
+"\   'is_expr': 0
+"\ }), get(a:, 1, {}))
+"endfunction
 
-noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command':'?'}))
-noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay':1}))
+"noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+"noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command':'?'}))
+"noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay':1}))
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 
 " vim airline
 let g:airline#extensions#tabline#enabled = 1 " Automatically displays all buffers when there's only one tab open
@@ -284,8 +310,82 @@ augroup END
 " key sequence timeout
 set timeoutlen=1000 ttimeoutlen=0
 
+" command-t
+nnoremap <Leader>ctf :CommandTFlush<cr>
+
 " youcompleteme
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_add_preview_to_completeopt = 0
 set completeopt-=preview
+
+" quicky opens .vimrc
+nnoremap <leader>ep :split ~/.vimperatorrc<cr>G
+
+" quicky opens .vimrc
+nnoremap <leader>ev :split $MYVIMRC<cr>G
+
+" quicly source .vimrv
+nnoremap <leader>sv :w<cr>:source $MYVIMRC<cr>
+
+" shell
+set shell=/bin/bash
+
+" abbreviation
+iabbrev atl alt
+iabbrev cslg console.log(
+
+" beginning previous line
+nnoremap K -
+
+" beginning next line
+nnoremap J +
+
+" beginning text of current line
+nnoremap H ^
+
+" end text of current line
+nnoremap L g_
+
+" select block normal and visual mode
+nnoremap <C-m> vat
+vnoremap <C-m> at
+
+" set working directory
+"cd /Users/david.soyez/Documents/Projects/prequal/htdocs/tools/mortgage-prequalification/src
+"cd /Users/david.soyez/Documents/Projects/cortel-site
+
+set autoread
+augroup checktime
+    au!
+    if !has("gui_running")
+        "silent! necessary otherwise throws errors when using command line window.
+        autocmd BufEnter        * silent! checktime
+        autocmd CursorHold      * silent! checktime
+        autocmd CursorHoldI     * silent! checktime
+        "these two _may_ slow things down. Remove if they do.
+        autocmd CursorMoved     * silent! checktime
+        autocmd CursorMovedI    * silent! checktime
+    endif
+augroup END
+
+" fim-fugitive
+nnoremap <Leader>glc :Gdiff HEAD^1<cr>
+
+" comment line
+noremap <Leader>cc ^I//<esc>
+nnoremap <Leader>dc ^xx<esc>
+
+nnoremap å 1
+nnoremap ß 2
+nnoremap ∂ 3
+nnoremap ƒ 4
+nnoremap © 5
+nnoremap ˙ 6
+nnoremap ∆ 7
+nnoremap ˚ 8
+nnoremap ¬ 9
+nnoremap … 0
+
+set wildignore=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
+let g:CommandTMaxCachedDirectories = 10
