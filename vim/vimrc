@@ -11,6 +11,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Plugins declaration starts here
 
+Plugin 'leafgarland/typescript-vim'
 Plugin 'StanAngeloff/php.vim' " Up-to-date PHP syntax file
 Plugin 'shawncplus/phpcomplete.vim' " Improved PHP omnicompletion
 Plugin 'nathanaelkane/vim-indent-guides' " displays indent levels in code
@@ -27,7 +28,6 @@ Plugin 'vim-airline/vim-airline-themes' " vim airline themes
 Plugin 'wincent/command-t' " Fast file navigation
 Plugin 'terryma/vim-multiple-cursors' " True Sublime Text style multiple selections for Vim
 Plugin 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red and provides :FixWhitespace to fix it
-Plugin 'scrooloose/nerdtree' " A tree explorer plugin for vim
 Plugin 'xolox/vim-misc' " xolox dependency
 Plugin 'xolox/vim-session' " Extended session management for Vim
 Plugin 'Valloric/YouCompleteMe' " A code-completion engine
@@ -42,6 +42,12 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'morhetz/gruvbox'
 Plugin 'tomasr/molokai'
 Plugin 'ap/vim-css-color'
+Plugin 'xolox/vim-notes'
+Plugin 'scrooloose/nerdtree' " A tree explorer plugin for vim
+"Bundle 'jistr/vim-nerdtree-tabs'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'Quramy/tsuquyomi' " typescript
+"Plugin 'Shougo/vimproc.vim'
 
 " Plugins declaration ends here
 
@@ -142,7 +148,7 @@ let Tlist_Auto_Open = 1
 let Tlist_Use_Right_Window = 1
 
 " dwm Default master width
-let g:dwm_master_pane_width = 170
+let g:dwm_master_pane_width = 120
 " Tab navigation like Firefox.
 nnoremap <C-S-tab> :tabprevious<CR>
 nnoremap <C-tab>   :tabnext<CR>
@@ -178,6 +184,14 @@ set softtabstop=4 "control how many columns vim uses when you hit Tab in insert 
 set autoindent " copy the indentation from the previous line
 set smartindent "automatically inserts one extra level of indentation in some cases
 
+
+"set noexpandtab
+"set copyindent
+"set preserveindent
+"set softtabstop=0
+"set shiftwidth=4
+"set tabstop=4
+
 "set hlsearch
 "hi Search guibg=yellow
 
@@ -185,6 +199,7 @@ set smartindent "automatically inserts one extra level of indentation in some ca
 "autocmd vimenter * NERDTree
 "shortcut to open NERDTree
 noremap <Leader>n :NERDTreeToggle<CR>
+"noremap <Leader>n :NERDTreeTabsToggle<CR>
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -355,17 +370,18 @@ vnoremap <C-m> at
 "cd /Users/david.soyez/Documents/Projects/prequal/htdocs/tools/mortgage-prequalification/src
 "cd /Users/david.soyez/Documents/Projects/cortel-site
 
+" autoreload file
 set autoread
 augroup checktime
     au!
     if !has("gui_running")
         "silent! necessary otherwise throws errors when using command line window.
         autocmd BufEnter        * silent! checktime
-        autocmd CursorHold      * silent! checktime
-        autocmd CursorHoldI     * silent! checktime
+        "autocmd CursorHold      * silent! checktime
+        "autocmd CursorHoldI     * silent! checktime
         "these two _may_ slow things down. Remove if they do.
-        autocmd CursorMoved     * silent! checktime
-        autocmd CursorMovedI    * silent! checktime
+        "autocmd CursorMoved     * silent! checktime
+        "autocmd CursorMovedI    * silent! checktime
     endif
 augroup END
 
@@ -376,6 +392,7 @@ nnoremap <Leader>glc :Gdiff HEAD^1<cr>
 noremap <Leader>cc ^I//<esc>
 nnoremap <Leader>dc ^xx<esc>
 
+" shortcut to number keys
 nnoremap å 1
 nnoremap ß 2
 nnoremap ∂ 3
@@ -387,5 +404,18 @@ nnoremap ˚ 8
 nnoremap ¬ 9
 nnoremap … 0
 
+" ignore some files and directories for command-t
 set wildignore=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
 let g:CommandTMaxCachedDirectories = 10
+
+"editorConfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+
+if !exists("g:ycm_semantic_triggers")
+    let g:ycm_semantic_triggers = {}
+endif
+
+"typescript
+let g:ycm_semantic_triggers['typescript'] = ['.']
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
