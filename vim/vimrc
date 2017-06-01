@@ -16,7 +16,7 @@ Plugin 'StanAngeloff/php.vim' " Up-to-date PHP syntax file
 Plugin 'shawncplus/phpcomplete.vim' " Improved PHP omnicompletion
 Plugin 'nathanaelkane/vim-indent-guides' " displays indent levels in code
 Plugin 'flazz/vim-colorschemes' " one colorscheme pack to rule them all
-Plugin 'tpope/vim-fugitive' "  a Git wrapper
+"Plugin 'tpope/vim-fugitive' "  a Git wrapper !! SLOW !!
 Plugin 'majutsushi/tagbar' " displays tags in a window F8
 Plugin 'airblade/vim-gitgutter' " shows a git diff in the gutte
 Plugin 'L9' " vim-scripts Library
@@ -48,6 +48,8 @@ Plugin 'scrooloose/nerdtree' " A tree explorer plugin for vim
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'Quramy/tsuquyomi' " typescript
 "Plugin 'Shougo/vimproc.vim'
+Plugin 'mattn/emmet-vim' " emmet
+Plugin 'AndrewRadev/splitjoin.vim' " A vim plugin that simplifies the transition between multiline and single-line code
 
 " Plugins declaration ends here
 
@@ -86,9 +88,9 @@ highlight SignColumn ctermbg=black    " terminal Vim
 highlight SignColumn guibg=black      " gVim/MacVim
 
 "theme and fonts
-set term=screen-256color
+"set term=screen-256color
 set background=dark
-set t_Co=256
+"set t_Co=256
 "colorscheme 256-jungle
 "let g:rehash256 = 1
 "let g:molokai_original = 1
@@ -96,8 +98,11 @@ set t_Co=256
 "let g:airline_theme='molokai'
 
 " gruvbox
-let g:gruvbox_contrast_dark = "hard"
+let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+set termguicolors
 colorscheme gruvbox
+"let g:gruvbox_contrast_dark = "hard"
 let g:airline_theme='gruvbox'
 
 " papercolor
@@ -199,6 +204,7 @@ set smartindent "automatically inserts one extra level of indentation in some ca
 "autocmd vimenter * NERDTree
 "shortcut to open NERDTree
 noremap <Leader>n :NERDTreeToggle<CR>
+let NERDTreeHijackNetrw=1
 "noremap <Leader>n :NERDTreeTabsToggle<CR>
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -370,7 +376,6 @@ vnoremap <C-m> at
 "cd /Users/david.soyez/Documents/Projects/prequal/htdocs/tools/mortgage-prequalification/src
 "cd /Users/david.soyez/Documents/Projects/cortel-site
 
-" autoreload file
 set autoread
 augroup checktime
     au!
@@ -392,7 +397,6 @@ nnoremap <Leader>glc :Gdiff HEAD^1<cr>
 noremap <Leader>cc ^I//<esc>
 nnoremap <Leader>dc ^xx<esc>
 
-" shortcut to number keys
 nnoremap å 1
 nnoremap ß 2
 nnoremap ∂ 3
@@ -404,7 +408,6 @@ nnoremap ˚ 8
 nnoremap ¬ 9
 nnoremap … 0
 
-" ignore some files and directories for command-t
 set wildignore=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
 let g:CommandTMaxCachedDirectories = 10
 
@@ -416,6 +419,18 @@ if !exists("g:ycm_semantic_triggers")
     let g:ycm_semantic_triggers = {}
 endif
 
-"typescript
 let g:ycm_semantic_triggers['typescript'] = ['.']
+
 autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+
+" emmet
+let g:user_emmet_leader_key='<C-m>'
+
+" fast save
+nnoremap <C-s> :w<CR>
+
+" select line content
+nnoremap <leader>v ^v$h
+
+" delete line content
+nnoremap <leader>dd ^v$hd
